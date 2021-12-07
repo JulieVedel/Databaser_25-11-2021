@@ -19,6 +19,10 @@ public class Studerende {
         this.klasse = klasse;
     }
 
+    public Studerende() {
+
+    }
+
     public int getStdnr() {
         return stdnr;
     }

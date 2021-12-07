@@ -2,6 +2,7 @@ package com.company;
 
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DbSql {
     private Connection connection;
@@ -125,9 +126,38 @@ public class DbSql {
         ResultSet resultset = stmt.executeQuery(sql);
 
         String fnavn = resultset.getString("fnavn");
-
+        System.out.println(fnavn);
     }
 
+    public ArrayList<Studfag> alleOplysninger() {
+        ArrayList<Studfag> tabel = new ArrayList<Studfag>();
+        String sql = "SELECT * FROM Studerende " +
+                "INNER JOIN studfag ON Studerende.stdnr = studfag.stdnr " +
+                "INNER JOIN Fag ON studfag.fagnr = Fag.fagnr";
+        try {
+            Statement stat = connection.createStatement();
+            ResultSet rs = stat.executeQuery(sql);
+
+            int i = 0;
+            while (rs.next()) {
+                Studfag sf = new Studfag();
+                sf.getS().setStdnr(rs.getInt("stdnr"));
+                sf.getS().setFnavn(rs.getString("fnavn"));
+                sf.getS().setEnavn(rs.getString("enavn"));
+                sf.getS().setAdresse(rs.getString("adresse"));
+                sf.getS().setPostnr(rs.getString("postnr"));
+                sf.getS().setMobil(rs.getString("mobil"));
+                sf.getS().setKlasse(rs.getString("klasse"));
+                sf.getF().setFagnr(rs.getInt("fagnr"));
+                sf.getF().setFagnavn(rs.getString("fagnavn"));
+                tabel.add(sf);
+                i++;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return tabel;
+    }
 
 
 

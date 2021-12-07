@@ -9,6 +9,10 @@ public class Fag {
         this.fagnavn = fagnavn;
     }
 
+    public Fag() {
+
+    }
+
     public int getFagnr() {
         return fagnr;
     }

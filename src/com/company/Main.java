@@ -1,6 +1,7 @@
 package com.company;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -41,7 +42,14 @@ public class Main {
 
 //		sql.updatestudklasse(stud1.getStdnr(), fag2.getFagnavn());
 
-		sql.soegstud(11112);
+//		sql.soegstud(11112);
 
+		ArrayList<Studfag> tabel2;
+		tabel2 = sql.alleOplysninger();
+
+		for (int i = 0; i < tabel2.size(); i++) {
+			System.out.println(tabel2.get(i).getS().getFnavn());
+			System.out.println(tabel2.get(i).getF().getFagnr() + ", " + tabel2.get(i).getF().getFagnavn());
+		}
     }
 }
